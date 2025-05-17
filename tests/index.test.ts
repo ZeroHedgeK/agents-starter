@@ -23,4 +23,26 @@ describe("Chat worker", () => {
     expect(await response.text()).toBe("Not found");
     expect(response.status).toBe(404);
   });
+
+  it("checks for open ai key", async () => {
+    process.env.OPENAI_API_KEY = "test";
+    const request = new Request("http://example.com/check-open-ai-key");
+    const ctx = createExecutionContext();
+    const response = await worker.fetch(request, env, ctx);
+    await waitOnExecutionContext(ctx);
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data.success).toBe(true);
+  });
+
+  it("returns failure when no api key", async () => {
+    delete process.env.OPENAI_API_KEY;
+    const request = new Request("http://example.com/check-open-ai-key");
+    const ctx = createExecutionContext();
+    const response = await worker.fetch(request, env, ctx);
+    await waitOnExecutionContext(ctx);
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data.success).toBe(false);
+  });
 });

@@ -137,7 +137,7 @@ The starting [`server.ts`](https://github.com/cloudflare/agents-starter/blob/mai
 2. Replacing the AI SDK with the [OpenAI SDK](https://github.com/openai/openai-node)
 3. Using the Cloudflare [Workers AI + AI Gateway](https://developers.cloudflare.com/ai-gateway/providers/workersai/#workers-binding) binding API directly
 
-For example, to use the [`workers-ai-provider`](https://sdk.vercel.ai/providers/community-providers/cloudflare-workers-ai), install the package:
+For example, to use the [`workers-ai-provider`](https://sdk.vercel.ai/providers/community-providers/cloudflare-workers-ai), install the package and set the `AI_PROVIDER` environment variable:
 
 ```sh
 npm install workers-ai-provider
@@ -169,6 +169,8 @@ Replace the `@ai-sdk/openai` import and usage with the `workers-ai-provider`:
 - const model = openai("gpt-4o-2024-11-20");
 + const model = workersai("@cf/deepseek-ai/deepseek-r1-distill-qwen-32b")
 ```
+
+Next, set `AI_PROVIDER=workers-ai` in your `.dev.vars` file (or as a secret) to switch providers without editing source files.
 
 Commit your changes and then run the `agents-starter` as per the rest of this README.
 

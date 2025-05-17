@@ -343,7 +343,6 @@
   }
 }
 
-<<<<<<< HEAD
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -419,13 +418,13 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-neutral-200 dark:border-neutral-800 outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
-=======
+
 /* Animated gradient background */
 @keyframes gradient-shift {
   0% {
@@ -462,4 +461,3 @@
     #111827
   );
 }
->>>>>>> cdf91f38e681872a196126ee6e98028cb28f4f5a

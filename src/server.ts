@@ -2,8 +2,8 @@ import { routeAgentRequest, type Schedule } from "agents";
 
 import { unstable_getSchedulePrompt } from "agents/schedule";
 
+import { openai } from "@ai-sdk/openai";
 import { AIChatAgent } from "agents/ai-chat-agent";
-import type { DurableObjectState } from "cloudflare:workers";
 import {
   createDataStreamResponse,
   generateId,
@@ -11,10 +11,10 @@ import {
   type StreamTextOnFinishCallback,
   type ToolSet,
 } from "ai";
-import { openai } from "@ai-sdk/openai";
+import type { DurableObjectState } from "cloudflare:workers";
 import { createWorkersAI } from "workers-ai-provider";
+import { executions, tools } from "./tools";
 import { processToolCalls } from "./utils";
-import { tools, executions } from "./tools";
 // import { env } from "cloudflare:workers";
 
 function getModel(env: Env) {
@@ -26,7 +26,7 @@ function getModel(env: Env) {
       console.error("Failed to initialize workers-ai provider", error);
     }
   }
-  return openai("gpt-4o-2024-11-20");
+  return openai("gpt-4.1-2025-04-14");
 }
 // Cloudflare AI Gateway
 // const openai = createOpenAI({

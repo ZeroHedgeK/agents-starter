@@ -3,6 +3,7 @@ import { routeAgentRequest, type Schedule } from "agents";
 import { unstable_getSchedulePrompt } from "agents/schedule";
 
 import { AIChatAgent } from "agents/ai-chat-agent";
+import type { DurableObjectState } from "cloudflare:workers";
 import {
   createDataStreamResponse,
   generateId,
@@ -11,11 +12,22 @@ import {
   type ToolSet,
 } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { createWorkersAI } from "workers-ai-provider";
 import { processToolCalls } from "./utils";
 import { tools, executions } from "./tools";
 // import { env } from "cloudflare:workers";
 
-const model = openai("gpt-4o-2024-11-20");
+function getModel(env: Env) {
+  if (process.env.AI_PROVIDER === "workers-ai") {
+    try {
+      const workersai = createWorkersAI({ binding: (env as any).AI });
+      return workersai("@cf/deepseek-ai/deepseek-r1-distill-qwen-32b");
+    } catch (error) {
+      console.error("Failed to initialize workers-ai provider", error);
+    }
+  }
+  return openai("gpt-4o-2024-11-20");
+}
 // Cloudflare AI Gateway
 // const openai = createOpenAI({
 //   apiKey: env.OPENAI_API_KEY,
@@ -26,6 +38,12 @@ const model = openai("gpt-4o-2024-11-20");
  * Chat Agent implementation that handles real-time AI chat interactions
  */
 export class Chat extends AIChatAgent<Env> {
+  env: Env;
+
+  constructor(state: DurableObjectState, env: Env) {
+    super(state, env);
+    this.env = env;
+  }
   /**
    * Handles incoming chat messages and manages the response stream
    * @param onFinish - Callback function executed when streaming completes
@@ -59,7 +77,7 @@ export class Chat extends AIChatAgent<Env> {
 
         // Stream the AI response using GPT-4
         const result = streamText({
-          model,
+          model: getModel(this.env),
           system: `You are a helpful assistant that can do various tasks... 
 
 ${unstable_getSchedulePrompt({ date: new Date() })}

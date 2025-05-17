@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback, use } from "react";
+import { useEffect, useState, useRef, useCallback, use, useMemo } from "react";
 import { useAgent } from "agents/react";
 import { useAgentChat } from "agents/ai-react";
 import type { Message } from "@ai-sdk/react";
@@ -71,6 +71,11 @@ export default function Chat() {
     agent: "chat",
   });
 
+  const initialMessages = useMemo(() => {
+    const stored = localStorage.getItem("chat_history");
+    return stored ? (JSON.parse(stored) as Message[]) : undefined;
+  }, []);
+
   const {
     messages: agentMessages,
     input: agentInput,
@@ -83,7 +88,12 @@ export default function Chat() {
   } = useAgentChat({
     agent,
     maxSteps: 5,
+    initialMessages,
   });
+
+  useEffect(() => {
+    localStorage.setItem("chat_history", JSON.stringify(agentMessages));
+  }, [agentMessages]);
 
   // Scroll to bottom when messages change
   useEffect(() => {

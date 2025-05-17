@@ -33,7 +33,7 @@ export function ToolInvocationCard({
 
   return (
     <Card
-      className={`p-4 my-3 w-full max-w-[500px] rounded-md bg-neutral-100 dark:bg-neutral-900 ${
+      className={`p-4 my-3 w-full max-w-[500px] rounded-md bg-gradient-to-br from-white via-orange-50 to-rose-100 dark:from-neutral-800 dark:via-neutral-850 dark:to-neutral-900 ${
         needsConfirmation ? "" : "border-[#F48120]/30"
       } overflow-hidden`}
     >

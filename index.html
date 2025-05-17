@@ -23,18 +23,26 @@
     <!-- Favicon support -->
     <link rel="icon" href="/favicon.ico" />
 
-    <!-- Preload fonts if any -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Prevent flash of unstyled content -->
     <style>
+      html,
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
       html {
-        background: var(--background);
+        background: linear-gradient(135deg, #fff5eb, #ffe4e1);
       }
       @media (prefers-color-scheme: dark) {
         html {
-          background: var(--background);
+          background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
         }
       }
     </style>

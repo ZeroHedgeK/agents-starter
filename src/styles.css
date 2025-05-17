@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Custom font for headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-playfair {
+  font-family: "Playfair Display", serif;
+}
+
 /* Markdown Table Styling (Tailwind @apply) */
 .markdown-body table {
   @apply w-full border-collapse my-4 text-[0.95em];

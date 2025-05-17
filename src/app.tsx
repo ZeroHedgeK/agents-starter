@@ -126,7 +126,7 @@ export default function Chat() {
             <svg
               width="28px"
               height="28px"
-              className="text-[#F48120]"
+              className="text-[#F48120] logo-bounce"
               data-icon="agents"
             >
               <title>Cloudflare Agents</title>

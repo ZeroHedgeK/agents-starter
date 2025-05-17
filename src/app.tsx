@@ -1,27 +1,27 @@
-import { useEffect, useState, useRef, useCallback, use, useMemo } from "react";
-import { useAgent } from "agents/react";
-import { useAgentChat } from "agents/ai-react";
 import type { Message } from "@ai-sdk/react";
+import { useAgentChat } from "agents/ai-react";
+import { useAgent } from "agents/react";
+import { use, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { tools } from "./tools";
 
 // Component imports
+import { Avatar } from "@/components/avatar/Avatar";
 import { Button } from "@/components/button/Button";
 import { Card } from "@/components/card/Card";
-import { Avatar } from "@/components/avatar/Avatar";
-import { Toggle } from "@/components/toggle/Toggle";
-import { Textarea } from "@/components/textarea/Textarea";
 import { MemoizedMarkdown } from "@/components/memoized-markdown";
+import { Textarea } from "@/components/textarea/Textarea";
+import { Toggle } from "@/components/toggle/Toggle";
 import { ToolInvocationCard } from "@/components/tool-invocation-card/ToolInvocationCard";
 
 // Icon imports
 import {
   Bug,
   Moon,
+  PaperPlaneTilt,
   Robot,
+  Stop,
   Sun,
   Trash,
-  PaperPlaneTilt,
-  Stop,
 } from "@phosphor-icons/react";
 
 // List of tools that require human confirmation
@@ -116,7 +116,9 @@ export default function Chat() {
   };
 
   return (
+
     <div className="h-[100vh] w-full p-4 flex justify-center items-center bg-fixed overflow-hidden bg-gradient-to-br from-orange-50 via-rose-100 to-purple-200 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800">
+
       <HasOpenAIKey />
       <div className="h-[calc(100vh-2rem)] w-full mx-auto max-w-lg flex flex-col shadow-xl rounded-md overflow-hidden relative border border-neutral-300 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-lg">
         <div className="px-4 py-3 border-b border-neutral-300 dark:border-neutral-800 flex items-center gap-3 sticky top-0 z-10">

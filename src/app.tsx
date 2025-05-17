@@ -116,17 +116,15 @@ export default function Chat() {
   };
 
   return (
-    <div
-      className="h-[100vh] w-full p-4 flex justify-center items-center bg-fixed overflow-hidden bg-gradient-to-br from-orange-50 via-rose-100 to-purple-200 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800"
-    >
+    <div className="h-[100vh] w-full p-4 flex justify-center items-center bg-fixed overflow-hidden bg-gradient-to-br from-orange-50 via-rose-100 to-purple-200 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800">
       <HasOpenAIKey />
-        <div className="h-[calc(100vh-2rem)] w-full mx-auto max-w-lg flex flex-col shadow-xl rounded-md overflow-hidden relative border border-neutral-300 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-lg">
+      <div className="h-[calc(100vh-2rem)] w-full mx-auto max-w-lg flex flex-col shadow-xl rounded-md overflow-hidden relative border border-neutral-300 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-lg">
         <div className="px-4 py-3 border-b border-neutral-300 dark:border-neutral-800 flex items-center gap-3 sticky top-0 z-10">
           <div className="flex items-center justify-center h-8 w-8">
             <svg
               width="28px"
               height="28px"
-              className="text-[#F48120]"
+              className="text-[#F48120] logo-bounce"
               data-icon="agents"
             >
               <title>Cloudflare Agents</title>
